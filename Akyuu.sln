@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akyuu.OBS", "Akyuu.OBS\Akyu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akyuu.MeetingDetector", "Akyuu.MeetingDetector\Akyuu.MeetingDetector.csproj", "{0FEB9B6E-28F2-4A43-80C4-5FBF08E206D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akyuu.MeetingDetector.Demo", "Akyuu.MeetingDetector.Demo\Akyuu.MeetingDetector.Demo.csproj", "{13D0FCCC-B7A4-4C41-9F46-71308F036058}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{0FEB9B6E-28F2-4A43-80C4-5FBF08E206D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FEB9B6E-28F2-4A43-80C4-5FBF08E206D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FEB9B6E-28F2-4A43-80C4-5FBF08E206D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13D0FCCC-B7A4-4C41-9F46-71308F036058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13D0FCCC-B7A4-4C41-9F46-71308F036058}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13D0FCCC-B7A4-4C41-9F46-71308F036058}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13D0FCCC-B7A4-4C41-9F46-71308F036058}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

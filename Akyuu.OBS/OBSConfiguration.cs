@@ -3,7 +3,7 @@
 public record OBSConfiguration
 {
     /// <summary>
-    /// 
+    /// Configuration for connecting to an OBS WebSocket.
     /// </summary>
     /// <param name="host">The hostname/IP of the OBS WebSocket instance.</param>
     /// <param name="password">The password for the WebSocket instance.</param>
