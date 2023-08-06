@@ -10,5 +10,10 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <!-- Only the NetworkFilter class should be accessed, but for testing I'll also make the NetworkListener functional -->
+        <InternalsVisibleTo Include="Akyuu.MeetingDetector.Demo" />
+    </ItemGroup>
 
 </Project>

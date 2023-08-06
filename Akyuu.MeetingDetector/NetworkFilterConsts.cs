@@ -6,7 +6,7 @@
 /// <remarks>
 /// Definitely not exhaustive.
 /// </remarks>
-public static class NetworkFilterConsts
+internal static class NetworkFilterConsts
 {
     public static void AddAllIPs(Dictionary<(byte, byte), byte> ips, Dictionary<byte, string> services)
     {

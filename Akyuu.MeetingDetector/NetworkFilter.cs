@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Versioning;
 using System.Timers;
+using Microsoft.Extensions.Logging;
 
 namespace Akyuu.MeetingDetector;
 
@@ -15,22 +16,25 @@ public class NetworkFilter : IDisposable
     private readonly Dictionary<byte, string> _services = new();
 
     private const int WindowSeconds = 15; // How many samples the queue can have
-    private const int PacketStartThreshold = 10;  // Avg of an ip to trigger meeting start
-    private const int PacketEndThreshold = 5;  // Avg of an ip to trigger meeting end
+    private const int PacketStartThreshold = 10;  // Total packets in accumulator to trigger meeting start
+    private const int PacketEndThreshold = 5;  // Total packets in accumulator to trigger meeting end
 
     private readonly object _accumulatorLock = new();
     private readonly Dictionary<(byte, byte), int> _accumulator = new();
     private readonly Queue<Sample> _samples = new();
+    private readonly HashSet<byte> _meetingsStarted = new();
     private Sample _currentSample = new ();
-    
+
+    private readonly NetworkListener _listener;
     private readonly System.Timers.Timer _timer;
 
     public event EventHandler<MeetingEventArgs>? MeetingStarted; 
     public event EventHandler<MeetingEventArgs>? MeetingEnded; 
     
-    public NetworkFilter(NetworkListener listener)
+    public NetworkFilter(ILogger<NetworkFilter>? logger = null)
     {
-        listener.UdpPacketReceived += ListenerOnUdpPacketReceived;
+        _listener = new NetworkListener(logger);
+        _listener.UdpPacketReceived += ListenerOnUdpPacketReceived;
         NetworkFilterConsts.AddAllIPs(_ips, _services);
         _timer = new System.Timers.Timer(TimeSpan.FromSeconds(1))
         {
@@ -43,10 +47,12 @@ public class NetworkFilter : IDisposable
     public void Start()
     {
         _timer.Start();
+        _listener.Start();
     }
 
     public void Stop()
     {
+        _listener.Stop();
         _timer.Stop();
     }
 
@@ -83,11 +89,12 @@ public class NetworkFilter : IDisposable
                 {
                     _accumulator[pair.Key] -= pair.Value;
                     
-                    if (_accumulator[pair.Key] / WindowSeconds <= PacketEndThreshold)
+                    var serviceId = _ips[pair.Key];
+                    if (_accumulator[pair.Key] <= PacketEndThreshold && _meetingsStarted.Contains(serviceId))
                     {
-                        var serviceId = _ips[pair.Key];
                         var service = _services[serviceId];
-                        
+
+                        _meetingsStarted.Remove(serviceId);
                         MeetingEnded?.Invoke(this, new MeetingEventArgs(pair.Key, serviceId, service));
                     }
                 }
@@ -99,11 +106,12 @@ public class NetworkFilter : IDisposable
                 _accumulator.TryAdd(pair.Key, 0);
                 _accumulator[pair.Key] += pair.Value;
                 
-                if (_accumulator[pair.Key] / WindowSeconds >= PacketStartThreshold)
+                var serviceId = _ips[pair.Key];
+                if (_accumulator[pair.Key] >= PacketStartThreshold && !_meetingsStarted.Contains(serviceId))
                 {
-                    var serviceId = _ips[pair.Key];
                     var service = _services[serviceId];
-                        
+                    
+                    _meetingsStarted.Add(serviceId);
                     MeetingStarted?.Invoke(this, new MeetingEventArgs(pair.Key, serviceId, service));
                 }
             }

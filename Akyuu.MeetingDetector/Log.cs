@@ -2,7 +2,7 @@
 
 namespace Akyuu.MeetingDetector;
 
-public static class Log
+internal static class Log
 {
     public static void Error<T>(this ILogger<T>? logger, string? text = null, Exception? ex = null)
     {

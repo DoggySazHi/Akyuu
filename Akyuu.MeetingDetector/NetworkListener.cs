@@ -15,18 +15,19 @@ namespace Akyuu.MeetingDetector;
 /// also i stg this code would be Linux compatible but ig i'd have to use C++ interop
 /// </remarks>
 [SupportedOSPlatform("windows")]
-public class NetworkListener : IDisposable
+internal class NetworkListener : IDisposable
 {
     private readonly IPAddress _source;
     private readonly Socket _socket;
     private readonly byte[] _buffer = new byte[65535]; // yolo
-    private readonly ILogger<NetworkListener>? _logger;
+    private readonly ILogger<NetworkFilter>? _logger;
     
     public bool Started { get; private set; }
 
     public event EventHandler<UdpPacketReceivedEventArgs>? UdpPacketReceived;
 
-    public NetworkListener(ILogger<NetworkListener>? logger = null)
+    // ReSharper disable once ContextualLoggerProblem
+    public NetworkListener(ILogger<NetworkFilter>? logger = null)
     {
         // Get first local IPv4 address.
         _source = Dns.GetHostEntry(string.Empty).AddressList
