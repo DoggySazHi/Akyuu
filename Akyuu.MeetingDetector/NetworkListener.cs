@@ -15,12 +15,14 @@ namespace Akyuu.MeetingDetector;
 /// also i stg this code would be Linux compatible but ig i'd have to use C++ interop
 /// </remarks>
 [SupportedOSPlatform("windows")]
-internal class NetworkListener
+public class NetworkListener : IDisposable
 {
     private readonly IPAddress _source;
     private readonly Socket _socket;
     private readonly byte[] _buffer = new byte[65535]; // yolo
     private readonly ILogger<NetworkListener>? _logger;
+    
+    public bool Started { get; private set; }
 
     public event EventHandler<UdpPacketReceivedEventArgs>? UdpPacketReceived;
 
@@ -35,16 +37,31 @@ internal class NetworkListener
 
     public void Start()
     {
+        if (Started)
+            return;
+        
         // SMELL ALL THE PACKETS
         _socket.Bind(new IPEndPoint(_source, 0));
         _socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.HeaderIncluded, true);
         _socket.IOControl(IOControlCode.ReceiveAll, new byte[] { 1, 0, 0, 0 }, new byte[] { 1, 0, 0, 0 });
         _socket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, ReceiveCallback, null);
+
+        Started = true;
     }
 
     public void Stop()
     {
+        if (!Started)
+            return;
+        
         _socket.Close();
+
+        Started = false;
+    }
+    
+    public void Dispose()
+    {
+        _socket.Dispose();
     }
 
     private void ReceiveCallback(IAsyncResult result)
@@ -88,7 +105,6 @@ internal class NetworkListener
 
         if (!isUsefulPacket) return;
         
-        var handler = UdpPacketReceived;
-        handler?.Invoke(this, new UdpPacketReceivedEventArgs { Header = header });
+        UdpPacketReceived?.Invoke(this, new UdpPacketReceivedEventArgs(header));
     }
 }

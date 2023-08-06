@@ -4,7 +4,7 @@ using System.Net.Sockets;
 namespace Akyuu.MeetingDetector;
 
 // I forgot I'm taking CSE-160 next semester
-internal record StrippedIPHeader
+public record StrippedIPHeader
 {
     public ProtocolType Protocol { get; }
     public IPAddress SourceIPAddress { get; }

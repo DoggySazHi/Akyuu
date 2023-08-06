@@ -8,32 +8,36 @@
 /// </remarks>
 public static class NetworkFilterConsts
 {
-    public static void AddAllIPs(HashSet<(byte, byte)> ips)
+    public static void AddAllIPs(Dictionary<(byte, byte), byte> ips, Dictionary<byte, string> services)
     {
-        AddTeamsIPs(ips);
-        AddDiscordIPs(ips);
+        AddTeamsIPs(ips, services);
+        AddDiscordIPs(ips, services);
     }
     
-    public static void AddTeamsIPs(HashSet<(byte, byte)> teamsIps)
+    public static void AddTeamsIPs(Dictionary<(byte, byte), byte> ips, Dictionary<byte, string> services)
     {
-        teamsIps.Add((13, 107));
-        teamsIps.Add((52, 107));
-        teamsIps.Add((52, 112));
-        teamsIps.Add((52, 113));
-        teamsIps.Add((52, 114));
-        teamsIps.Add((52, 115));
-        teamsIps.Add((52, 120));
-        teamsIps.Add((52, 122));
-        teamsIps.Add((52, 238));
-        teamsIps.Add((52, 244));
+        ips[(13, 107)] = 1;
+        ips[(52, 107)] = 1;
+        ips[(52, 112)] = 1;
+        ips[(52, 113)] = 1;
+        ips[(52, 114)] = 1;
+        ips[(52, 115)] = 1;
+        ips[(52, 120)] = 1;
+        ips[(52, 122)] = 1;
+        ips[(52, 238)] = 1;
+        ips[(52, 244)] = 1;
+
+        services[1] = "Microsoft Teams";
     }
     
-    public static void AddDiscordIPs(HashSet<(byte, byte)> discordIps)
+    public static void AddDiscordIPs(Dictionary<(byte, byte), byte> ips, Dictionary<byte, string> services)
     {
-        discordIps.Add((35, 215));
-        discordIps.Add((66, 22));
-        discordIps.Add((161, 202));
-        discordIps.Add((162, 159));
-        discordIps.Add((162, 245));
+        ips[(35, 215)] = 2;
+        ips[(66, 22)] = 2;
+        ips[(161, 202)] = 2;
+        ips[(162, 159)] = 2;
+        ips[(162, 245)] = 2;
+
+        services[2] = "Discord";
     }
 }

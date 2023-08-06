@@ -3,7 +3,12 @@
 /// <summary>
 /// Header data when a UDP packet is received.
 /// </summary>
-internal class UdpPacketReceivedEventArgs : EventArgs
+public class UdpPacketReceivedEventArgs : EventArgs
 {
-    public StrippedIPHeader Header { get; set; } = null!;
+    public StrippedIPHeader Header { get; set; }
+
+    public UdpPacketReceivedEventArgs(StrippedIPHeader header)
+    {
+        Header = header;
+    }
 }
