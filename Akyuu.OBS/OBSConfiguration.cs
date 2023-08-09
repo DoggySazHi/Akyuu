@@ -9,16 +9,17 @@ public record OBSConfiguration
     /// <param name="password">The password for the WebSocket instance.</param>
     /// <param name="port">The port of the WebSocket instance.</param>
     /// <param name="reconnectTimeout">Reconnection timeout for the WebSocket, in milliseconds.</param>
-    public OBSConfiguration(string host, string password, ushort port = 4455, uint reconnectTimeout = 30000)
+    public OBSConfiguration(string host, string? password = null, ushort port = 4455, uint? reconnectTimeout = 30000)
     {
         Host = host;
         Password = password;
         Port = port;
-        ReconnectTimeout = TimeSpan.FromMilliseconds(reconnectTimeout);
+        ReconnectTimeout = reconnectTimeout == null ? null : TimeSpan.FromMilliseconds(reconnectTimeout.Value);
     }
 
     public string Host { get; }
-    public string Password { get; }
+    public string? Password { get; }
     public ushort Port { get; }
-    public TimeSpan ReconnectTimeout { get; }
+    public TimeSpan? ReconnectTimeout { get; }
+    public Uri Uri => new($"ws://{Host}:{Port}");
 }
