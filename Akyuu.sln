@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akyuu.MeetingDetector.Demo"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akyuu.OBS.Demo", "Akyuu.OBS.Demo\Akyuu.OBS.Demo.csproj", "{C02C6FF8-7A82-4C30-8208-14D96476D7C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akyuu.OpenAI", "Akyuu.OpenAI\Akyuu.OpenAI.csproj", "{CF92AB59-8CC2-4A1D-9528-8B50EBD3235D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akyuu.OpenAI.Demo", "Akyuu.OpenAI.Demo\Akyuu.OpenAI.Demo.csproj", "{68BCCDBC-554A-4DAE-90A4-1735DCFB9226}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{C02C6FF8-7A82-4C30-8208-14D96476D7C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C02C6FF8-7A82-4C30-8208-14D96476D7C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C02C6FF8-7A82-4C30-8208-14D96476D7C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF92AB59-8CC2-4A1D-9528-8B50EBD3235D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF92AB59-8CC2-4A1D-9528-8B50EBD3235D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF92AB59-8CC2-4A1D-9528-8B50EBD3235D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF92AB59-8CC2-4A1D-9528-8B50EBD3235D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68BCCDBC-554A-4DAE-90A4-1735DCFB9226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68BCCDBC-554A-4DAE-90A4-1735DCFB9226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68BCCDBC-554A-4DAE-90A4-1735DCFB9226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68BCCDBC-554A-4DAE-90A4-1735DCFB9226}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

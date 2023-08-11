@@ -21,3 +21,4 @@ task list of things that could go wrong
 - [ ] small API server to unite all components
 - [ ] (extra credit) demo GUI
   - please don't be WPF (probably will be, unless the API server gets a webpage)
+- [ ] (not-so-extra credit) icons/art bc we definitely need an Akyuu
