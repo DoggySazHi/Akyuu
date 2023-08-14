@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akyuu.Server", "Akyuu.Server\Akyuu.Server.csproj", "{141C5A71-3661-41F8-A78B-8FF0640CC893}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akyuu.OBS", "Akyuu.OBS\Akyuu.OBS.csproj", "{D49FFE95-9353-4085-8AFA-5430AB0685AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akyuu.MeetingDetector", "Akyuu.MeetingDetector\Akyuu.MeetingDetector.csproj", "{0FEB9B6E-28F2-4A43-80C4-5FBF08E206D5}"
@@ -14,16 +12,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akyuu.OpenAI", "Akyuu.OpenA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akyuu.OpenAI.Demo", "Akyuu.OpenAI.Demo\Akyuu.OpenAI.Demo.csproj", "{68BCCDBC-554A-4DAE-90A4-1735DCFB9226}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akyuu.Server", "Akyuu.Server\Akyuu.Server.csproj", "{425A1E40-8712-4046-BC23-C0D487297BD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{141C5A71-3661-41F8-A78B-8FF0640CC893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{141C5A71-3661-41F8-A78B-8FF0640CC893}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{141C5A71-3661-41F8-A78B-8FF0640CC893}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{141C5A71-3661-41F8-A78B-8FF0640CC893}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D49FFE95-9353-4085-8AFA-5430AB0685AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D49FFE95-9353-4085-8AFA-5430AB0685AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D49FFE95-9353-4085-8AFA-5430AB0685AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -48,5 +44,9 @@ Global
 		{68BCCDBC-554A-4DAE-90A4-1735DCFB9226}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68BCCDBC-554A-4DAE-90A4-1735DCFB9226}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68BCCDBC-554A-4DAE-90A4-1735DCFB9226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425A1E40-8712-4046-BC23-C0D487297BD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425A1E40-8712-4046-BC23-C0D487297BD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425A1E40-8712-4046-BC23-C0D487297BD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425A1E40-8712-4046-BC23-C0D487297BD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

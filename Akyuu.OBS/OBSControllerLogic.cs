@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using Akyuu.OBS.Models;
 using Akyuu.OBS.Models.OpCodes;
-using JetBrains.Annotations;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Websocket.Client;

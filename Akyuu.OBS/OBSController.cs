@@ -1,6 +1,5 @@
 ﻿using System.Net.WebSockets;
 using Akyuu.OBS.Models.OpCodes;
-using Newtonsoft.Json;
 using Websocket.Client;
 
 namespace Akyuu.OBS;

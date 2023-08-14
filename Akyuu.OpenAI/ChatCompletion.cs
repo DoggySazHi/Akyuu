@@ -16,4 +16,9 @@ public partial class OpenAIClient
         var data = await response.Content.ReadAsStringAsync();
         return JsonConvert.DeserializeObject<ChatCompletionResponse>(data)!;
     }
+
+    public int EstimateTokens(string message)
+    {
+        return message.Length / 4;
+    }
 }
