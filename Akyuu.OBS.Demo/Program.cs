@@ -7,7 +7,7 @@ var configJSON = JObject.Parse(file);
 var config = new OBSConfiguration(
     configJSON["host"]?.ToObject<string>() ?? throw new InvalidOperationException("Host is not set in config"),
     configJSON["password"]?.ToObject<string>() ?? throw new InvalidOperationException("Password is not set in config"),
-    configJSON["port"]?.ToObject<ushort>() ?? default);
+    configJSON["port"]?.ToObject<ushort>() ?? 4455);
 
 Console.WriteLine($"Connecting to {config.Uri}");
 var controller = new OBSController(config);

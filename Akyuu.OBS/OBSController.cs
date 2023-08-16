@@ -46,6 +46,12 @@ public class OBSController : IDisposable
     {
         return await _logic.SendRequest(request);
     }
+    
+    public async Task<RequestResponse<T>> SendRequest<T>(Request request)
+    {
+        var result = await _logic.SendRequest(request);
+        return new RequestResponse<T>(result);
+    }
 
     private void OnMessage(ResponseMessage message)
     {

@@ -22,4 +22,9 @@
       <Folder Include="Controllers\" />
       <Folder Include="Services\" />
     </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Akyuu.MeetingDetector\Akyuu.MeetingDetector.csproj" />
+      <ProjectReference Include="..\Akyuu.OBS\Akyuu.OBS.csproj" />
+    </ItemGroup>
 </Project>

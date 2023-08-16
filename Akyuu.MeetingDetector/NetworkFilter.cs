@@ -10,7 +10,7 @@ internal class Sample
 }
 
 [SupportedOSPlatform("windows")]
-public class NetworkFilter : IDisposable
+public class NetworkFilter : IDisposable, INetworkFilter
 {
     private readonly Dictionary<(byte, byte), byte> _ips = new();
     private readonly Dictionary<byte, string> _services = new();
