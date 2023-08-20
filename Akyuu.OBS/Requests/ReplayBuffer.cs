@@ -1,4 +1,5 @@
 ﻿using Akyuu.OBS.Models.OpCodes;
+using Newtonsoft.Json;
 
 namespace Akyuu.OBS.Requests;
 
@@ -14,14 +15,14 @@ public static class ReplayBuffer
         return await controller.SendRequest(new Request("StopReplayBuffer"));
     }
     
-    public static async Task<RequestResponse> GetReplayBufferStatus(this OBSController controller)
+    public static async Task<RequestResponse<BufferStatusResponse>> GetReplayBufferStatus(this OBSController controller)
     {
-        return await controller.SendRequest(new Request("GetReplayBufferStatus"));
+        return await controller.SendRequest<BufferStatusResponse>(new Request("GetReplayBufferStatus"));
     }
     
-    public static async Task<RequestResponse> ToggleReplayBuffer(this OBSController controller)
+    public static async Task<RequestResponse<BufferStatusResponse>> ToggleReplayBuffer(this OBSController controller)
     {
-        return await controller.SendRequest(new Request("ToggleReplayBuffer"));
+        return await controller.SendRequest<BufferStatusResponse>(new Request("ToggleReplayBuffer"));
     }
     
     public static async Task<RequestResponse> SaveReplayBuffer(this OBSController controller)
@@ -29,8 +30,18 @@ public static class ReplayBuffer
         return await controller.SendRequest(new Request("SaveReplayBuffer"));
     }
     
-    public static async Task<RequestResponse> GetLastReplayBufferReplay(this OBSController controller)
+    public static async Task<RequestResponse<LastReplayBufferResponse>> GetLastReplayBufferReplay(this OBSController controller)
     {
-        return await controller.SendRequest(new Request("GetLastReplayBufferReplay"));
+        return await controller.SendRequest<LastReplayBufferResponse>(new Request("GetLastReplayBufferReplay"));
     }
+}
+
+public class BufferStatusResponse
+{
+    [JsonProperty("outputActive")] public bool OutputActive { get; set; }
+}
+
+public class LastReplayBufferResponse
+{
+    [JsonProperty("savedReplayPath")] public string SavedReplayPath { get; set; } = null!;
 }

@@ -16,7 +16,7 @@ public interface IOpCode
     }
 }
 
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Method)]
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Method, Inherited = false)]
 [BaseTypeRequired(typeof(IOpCode))]
 [MeansImplicitUse]
 public class OpCodeAttribute : Attribute

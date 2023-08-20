@@ -25,11 +25,7 @@ while (loop)
             break;
         case 'd':
             var result = await controller.StopRecording();
-            if (result.ResponseData != null)
-            {
-                dynamic response = result.ResponseData;
-                Console.WriteLine($"File saved to {response.outputPath}");
-            }
+            Console.WriteLine($"File saved to {result.ResponseData?.OutputPath ?? "<failed to stop/save>"}");
 
             break;
         case 'q':

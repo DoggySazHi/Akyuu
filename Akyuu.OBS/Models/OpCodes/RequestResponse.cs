@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Akyuu.OBS.Models.OpCodes;
 
@@ -18,10 +19,19 @@ public class RequestResponse<T> : RequestResponse
         RequestType = original.RequestType;
         RequestId = original.RequestId;
         RequestStatus = original.RequestStatus;
-        ResponseData = (T?) Convert.ChangeType(original.ResponseData, typeof(T?));
+        
+        if (original.ResponseData is JObject obj)
+        {
+            ResponseData = obj.ToObject<T>()!;
+        }
+        else
+        {
+            // hopefully this isn't the case
+            ResponseData = (T) Convert.ChangeType(original.ResponseData, typeof(T))!;
+        }
     }
     
-    [JsonProperty("responseData")] public new T? ResponseData { get; set; }
+    [JsonProperty("responseData")] public new T ResponseData { get; set; }
 }
 
 public class RequestResponseStatus

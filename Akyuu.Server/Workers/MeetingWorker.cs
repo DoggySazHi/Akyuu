@@ -1,6 +1,7 @@
 using Akyuu.MeetingDetector;
 using Akyuu.OBS;
 using Akyuu.OBS.Requests;
+using Akyuu.Server.Models;
 
 namespace Akyuu.Server.Workers;
 
@@ -14,20 +15,15 @@ public class MeetingWorker : BackgroundService
     
     private (byte, byte)? _recordingSourceIp;
 
-    public MeetingWorker(ILogger<MeetingWorker> logger, IConfiguration config, INetworkFilter filter)
+    public MeetingWorker(ILogger<MeetingWorker> logger, OBSSettings obsSettings, INetworkFilter filter)
     {
         _logger = logger;
         _filter = filter;
         _filter.MeetingStarted += async (_, e) => await FilterOnMeetingStarted(e);
         _filter.MeetingEnded += async (_, e) => await FilterOnMeetingEnded(e);
-        _obs = new OBSController(new OBSConfiguration(
-            config["OBS:Host"] ?? throw new InvalidOperationException(),
-            config["OBS:Password"],
-            config["OBS:Port"] != null ? ushort.Parse(config["OBS:Port"]!) : (ushort) 4455,
-            config["OBS:Timeout"] != null ? uint.Parse(config["OBS:Timeout"]!) : 30000
-        ));
+        _obs = new OBSController(new OBSConfiguration(obsSettings.Host, obsSettings.Password, obsSettings.Port, obsSettings.Timeout));
 
-        _useReplayBuffer = config.GetValue("OBS:UseReplayBuffer", false);
+        _useReplayBuffer = obsSettings.UseReplayBuffer;
     }
 
     private async Task FilterOnMeetingStarted(MeetingEventArgs e)
@@ -49,12 +45,7 @@ public class MeetingWorker : BackgroundService
             _recordingSourceIp = null;
             
             var result = await _obs.StopRecording();
-            if (result.ResponseData != null)
-            {
-                dynamic response = result.ResponseData;
-                string outputPath = response.outputPath;
-                _logger.LogInformation("Stopped recording, file saved to {OutputPath}", outputPath);
-            }
+            _logger.LogInformation("Stopped recording, file saved to {OutputPath}", result.ResponseData?.OutputPath ?? "<failed to save recording>");
         }
     }
 
@@ -63,6 +54,11 @@ public class MeetingWorker : BackgroundService
         _filter.Start();
         await _obs.Start();
         _logger.LogInformation("Initialized meeting worker");
+
+        if (_useReplayBuffer)
+        {
+            _logger.LogInformation("Replay buffer configured");
+        }
         
         while (!stoppingToken.IsCancellationRequested)
         {
